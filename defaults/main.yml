@@ -1,0 +1,21 @@
+---
+# defaults file for android-sdk
+
+android_ndk_version: "10d"
+android_ndk_install_location: /opt/android/ndk
+
+android_ndk_dependency_packages:
+  - "libncurses5:i386"
+  - "libstdc++6:i386"
+  - "zlib1g:i386"
+  - "imagemagick"
+  - "expect"
+  - "gradle"
+  - "ant"
+  - "ccache"
+  - "autoconf"
+  - "automake"
+  - "ant"
+  - "ccache"
+  - "python-dev"
+  - "zlibc"

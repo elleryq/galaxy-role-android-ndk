@@ -1,0 +1,27 @@
+---
+
+- name: Ensure Android NDK tools directory exists
+  file: path={{ android_ndk_install_location }} state=directory
+
+- name: Download Android NDK tools
+  get_url: url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86_64.bin" dest="{{ android_ndk_install_location }}/ndk.bin"
+
+- name: Change ndk.bin permissions
+  file: path="{{ android_ndk_install_location }}/ndk.bin" mode="0755"
+
+- name: Execute NDK installer
+  command: "{{ android_ndk_install_location }}/ndk.bin"
+  args:
+      chdir: "{{ android_ndk_install_location }}"
+
+- name: Remove alias
+  command: rm -f "{{ android_ndk_install_location }}/android-ndk-linux"
+
+- name: Create alias for NDK
+  file: src="{{ android_ndk_install_location }}/android-ndk-r{{ android_ndk_version }}" dest="{{ android_ndk_install_location }}/android-ndk-linux" state=link
+
+- name: Remove downloaded file
+  file: path={{ android_ndk_install_location }}/ndk.bin state=absent
+
+- name: Set PATH in /etc/profile.d
+  template: src=android-ndk.sh.j2 dest=/etc/profile.d/android-ndk.sh

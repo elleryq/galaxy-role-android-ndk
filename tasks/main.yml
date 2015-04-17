@@ -1,0 +1,4 @@
+---
+# tasks file for android-ndk
+- include: dependencies.yml
+- include: ndktools.yml
