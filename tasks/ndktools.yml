@@ -15,7 +15,7 @@
       chdir: "{{ android_ndk_install_location }}"
 
 - name: Remove alias
-  command: rm -f "{{ android_ndk_install_location }}/android-ndk-linux"
+  file: path="{{ android_ndk_install_location }}/android-ndk-linux" state="absent"
 
 - name: Create alias for NDK
   file: src="{{ android_ndk_install_location }}/android-ndk-r{{ android_ndk_version }}" dest="{{ android_ndk_install_location }}/android-ndk-linux" state=link
@@ -24,4 +24,4 @@
   file: path={{ android_ndk_install_location }}/ndk.bin state=absent
 
 - name: Set PATH in /etc/profile.d
-  template: src=android-ndk.sh.j2 dest=/etc/profile.d/android-ndk.sh
+  template: src=android-ndk.sh.j2 dest=/etc/profile.d/Z99-android-ndk.sh
