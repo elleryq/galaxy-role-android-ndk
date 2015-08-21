@@ -25,6 +25,8 @@
   command: "{{ android_ndk_install_location }}/ndk.bin"
   args:
       chdir: "{{ android_ndk_install_location }}"
+      # Test whether installation has succeeded before on this host
+      creates: /etc/profile.d/Z99-android-ndk.sh
 
 - name: Remove alias
   file: path="{{ android_ndk_install_location }}/android-ndk-linux" state="absent"
