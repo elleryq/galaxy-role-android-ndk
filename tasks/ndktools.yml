@@ -3,8 +3,20 @@
 - name: Ensure Android NDK tools directory exists
   file: path={{ android_ndk_install_location }} state=directory
 
-- name: Download Android NDK tools
-  get_url: url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86_64.bin" dest="{{ android_ndk_install_location }}/ndk.bin"
+- name: Download Android NDK tools, x86_64
+  get_url: 
+    url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86_64.bin" 
+    dest="{{ android_ndk_install_location }}/ndk.bin"
+    #checksum="md5:{{ android_ndk_md5sum_64bit }}"
+  when: ansible_userspace_bits == "64"
+
+- name: Download Android NDK tools, x86
+  get_url: 
+    url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86.bin" 
+    dest="{{ android_ndk_install_location }}/ndk.bin"
+    #checksum="md5:{{ android_ndk_md5sum_32bit }}"
+  when: ansible_userspace_bits == "32"
+
 
 - name: Change ndk.bin permissions
   file: path="{{ android_ndk_install_location }}/ndk.bin" mode="0755"
