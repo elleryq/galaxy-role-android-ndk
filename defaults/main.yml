@@ -5,9 +5,9 @@ android_ndk_version: "10d"
 android_ndk_install_location: /opt/android/ndk
 
 android_ndk_dependency_packages:
-  - "libncurses5:i386"
-  - "libstdc++6:i386"
-  - "zlib1g:i386"
+  - "libncurses5"
+  - "libstdc++6"
+  - "zlib1g"
   - "imagemagick"
   - "expect"
   - "gradle"
@@ -15,7 +15,11 @@ android_ndk_dependency_packages:
   - "ccache"
   - "autoconf"
   - "automake"
-  - "ant"
   - "ccache"
   - "python-dev"
   - "zlibc"
+ubuntu_1204_ia32_libs:
+  - "libgd2-xpm"
+  - "libgphoto2-2"
+  - "libsane"
+  - "ia32-libs-multiarch"
