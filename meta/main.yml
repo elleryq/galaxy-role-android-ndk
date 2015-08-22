@@ -12,5 +12,3 @@ galaxy_info:
   categories:
   - development
   - system
-dependencies:
-    - { role: "nickp666.android-sdk" }
