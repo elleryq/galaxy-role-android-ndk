@@ -1,4 +1,8 @@
 ---
+- name: See if we already have the NDK
+  # Check for a file that's created at the end of successful install
+  stat: path="/etc/profile.d/Z99-android-ndk.sh"  
+  register: ndk_installed_PATH
 
 - name: Ensure Android NDK tools directory exists
   file: path={{ android_ndk_install_location }} state=directory
@@ -8,23 +12,28 @@
     url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86_64.bin" 
     dest="{{ android_ndk_install_location }}/ndk.bin"
     #checksum="md5:{{ android_ndk_md5sum_64bit }}"
-  when: ansible_userspace_bits == "64"
+  when: ansible_userspace_bits == "64" and 
+        ndk_installed_PATH.stat.exists == False
 
 - name: Download Android NDK tools, x86
   get_url: 
     url="http://dl.google.com/android/ndk/android-ndk-r{{ android_ndk_version }}-linux-x86.bin" 
     dest="{{ android_ndk_install_location }}/ndk.bin"
     #checksum="md5:{{ android_ndk_md5sum_32bit }}"
-  when: ansible_userspace_bits == "32"
-
+  when: ansible_userspace_bits == "32" and 
+        ndk_installed_PATH.stat.exists == False
 
 - name: Change ndk.bin permissions
   file: path="{{ android_ndk_install_location }}/ndk.bin" mode="0755"
+  when: ndk_installed_PATH.stat.exists == False
 
 - name: Execute NDK installer
   command: "{{ android_ndk_install_location }}/ndk.bin"
   args:
       chdir: "{{ android_ndk_install_location }}"
+      # Test whether installation has succeeded before on this host
+      creates: /etc/profile.d/Z99-android-ndk.sh
+  when: ndk_installed_PATH.stat.exists == False
 
 - name: Remove alias
   file: path="{{ android_ndk_install_location }}/android-ndk-linux" state="absent"
