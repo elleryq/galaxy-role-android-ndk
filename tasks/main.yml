@@ -1,4 +1,7 @@
 ---
 # tasks file for android-ndk
 - include: dependencies.yml
+  when: ansible_os_family == "Debian"
+
 - include: ndktools.yml
+  when: ansible_os_family == "Debian" 
