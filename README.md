@@ -46,6 +46,10 @@ A list of aptitude installable build dependency packages.
       roles:
         - { role: elleryq.android-ndk }
 
+## Contributing
+
+ * E. Dunham - edunham (at) mozilla.com
+
 ## License
 
 BSD
@@ -53,3 +57,4 @@ BSD
 ## Author Information
 
 This role was created in 2015 by [elleryq](https://github.com/elleryq).
+
