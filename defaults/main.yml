@@ -2,9 +2,6 @@
 # defaults file for android-sdk
 
 android_ndk_version: "10e"
-# md5sums come from http://developer.android.com/ndk/downloads/index.html
-android_ndk_md5sum_32bit: "c3edd3273029da1cbd2f62c48249e978"
-ansible_ndk_md5sum_64bit: "19af543b068bdb7f27787c2bc69aba7f"
 android_ndk_install_location: /opt/android/ndk
 
 android_ndk_dependency_packages:

@@ -10,4 +10,4 @@
 
 - name: Install build dependencies
   apt: pkg={{ item }} state=latest update_cache=yes
-  with_items: android_ndk_dependency_packages
+  with_items: "{{android_ndk_dependency_packages}}"
