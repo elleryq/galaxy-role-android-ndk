@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/elleryq/galaxy-role-android-ndk.svg?branch=master)](https://travis-ci.org/elleryq/galaxy-role-android-ndk)
+
 # Ansible Role: Android NDK
 
 An Ansible Role that installs the Android NDK tools and dependencies on Ubuntu.
