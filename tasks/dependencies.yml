@@ -6,7 +6,7 @@
 - name: Install ia32-libs on 12.04
   apt: pkg={{ item }} state=latest update_cache=yes
   when: ansible_distribution_version == "12.04"
-  with_items: ubuntu_1204_ia32_libs
+  with_items: "{{ubuntu_1204_ia32_libs}}"
 
 - name: Install build dependencies
   apt: pkg={{ item }} state=latest update_cache=yes
